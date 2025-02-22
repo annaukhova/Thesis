@@ -6,8 +6,8 @@ from sklearn.model_selection import train_test_split
 print("Current Working Directory:", os.getcwd())
 
 # Dictionary of anachronistic words
-anachronistic_words_20th = ["selfie", "cringe", "lit"]
-anachronistic_words_21st = ["telegram", "phonograph", "telegraph"]
+words_20 = ["selfie", "cringe", "lit"]
+words_21 = ["telegram", "phonograph", "telegraph"]
 
 def preprocess_text(text, keywords):
     text = text.lower()
@@ -16,7 +16,7 @@ def preprocess_text(text, keywords):
     flagged_words = [word for word in words if word in keywords]
     return ' '.join(words), flagged_words
 
-def read_and_preprocess_text(file_path, label, keywords):
+def analyze_text(file_path, label, keywords):
     with open(file_path, "r", encoding="utf-8") as file:
         text = file.read()
     text, flagged_words = preprocess_text(text, keywords)
@@ -24,8 +24,8 @@ def read_and_preprocess_text(file_path, label, keywords):
 
 file1_path = "C:/Users/Hp/Desktop/Thesis/data/file1.txt"
 file2_path = "C:/Users/Hp/Desktop/Thesis/data/file2.txt"
-text1, label1, flagged_words_20th = read_and_preprocess_text(file1_path, 0, anachronistic_words_20th)
-text2, label2, flagged_words_21st = read_and_preprocess_text(file2_path, 1, anachronistic_words_21st)
+text1, label1, flagged_words_20th = analyze_text(file1_path, 0, words_20)
+text2, label2, flagged_words_21st = analyze_text(file2_path, 1, words_21)
 
 data = pd.DataFrame({
     "text": [text1, text2],
